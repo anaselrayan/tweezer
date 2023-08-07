@@ -1,5 +1,6 @@
 package com.anaselrayan.tweezer.model;
 
+import com.anaselrayan.tweezer.security.models.Authority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,10 @@ public class AppUser {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserPost> posts;
+
+    @OneToMany
+    @JsonIgnore
+    private Set<Authority> authorities;
 
     public AppUser(String email, String password, UserProfile profile) {
         this.email = email;
