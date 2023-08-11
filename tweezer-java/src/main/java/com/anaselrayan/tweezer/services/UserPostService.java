@@ -1,6 +1,7 @@
 package com.anaselrayan.tweezer.services;
 
 import com.anaselrayan.tweezer.model.UserPost;
+import com.anaselrayan.tweezer.projection.UserPostSummary;
 import com.anaselrayan.tweezer.repos.UserPostRepo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,8 @@ import java.util.List;
 public class UserPostService {
     private final UserPostRepo postRepo;
 
-    public List<UserPost> getAllPosts() {
-        return postRepo.findAll();
+    public List<UserPostSummary> getAllPostsForUser(Long profileId) {
+        return postRepo.findPostsByProfileId(profileId);
     }
 
     public UserPost getPostById(Long postId) {

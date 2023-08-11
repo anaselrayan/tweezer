@@ -1,7 +1,6 @@
 package com.anaselrayan.tweezer.model;
 
 import com.anaselrayan.tweezer.security.models.Authority;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,25 +18,17 @@ import java.util.Set;
 public class AppUser {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstname;
-    private String lastname;
+    private String username;
+    private String email;
+    private String password;
     private LocalDateTime joinedAt;
 
-    @JsonIgnore
-    private String email;
-    @JsonIgnore
-    private String password;
-
     @OneToOne
-    @JsonIgnore
     private UserProfile profile;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private Set<UserPost> posts;
-
-    @OneToMany
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id", nullable = false),
+    inverseJoinColumns = @JoinColumn(name = "authority_id", nullable = false))
     private Set<Authority> authorities;
 
     public AppUser(String email, String password, UserProfile profile) {
@@ -46,4 +37,5 @@ public class AppUser {
         this.profile = profile;
         this.joinedAt = LocalDateTime.now();
     }
+
 }

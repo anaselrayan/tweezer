@@ -10,6 +10,7 @@ import com.anaselrayan.tweezer.repos.UserProfileRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
@@ -17,17 +18,19 @@ public class StartUp implements CommandLineRunner {
     private final UserPostRepo postRepo;
     private final AppUserRepo userRepo;
     private final UserProfileRepo profileRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
         UserProfile profile1 = new UserProfile();
-        AppUser user1 = new AppUser("anas@gmail.com", "123", profile1);
+        AppUser user1 =
+                new AppUser("anas@gmail.com", passwordEncoder.encode("123"), profile1);
 
         UserPost post1 = new UserPost("hello my name is Anas Elrayan",
-                UserPostType.PUBLIC, "", user1);
+                UserPostType.PUBLIC, "", profile1);
 
         UserPost post2 = new UserPost("This is my second post!",
-                UserPostType.FRIENDS, "", user1);
+                UserPostType.FRIENDS, "", profile1);
 
         profileRepo.save(profile1);
         userRepo.save(user1);

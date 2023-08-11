@@ -24,17 +24,17 @@ public class UserPost {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser user;
+    @JoinColumn(name = "profile_id", nullable = false)
+    private UserProfile profile;
 
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
 
-    public UserPost(String content, UserPostType postType, String tags, AppUser user) {
+    public UserPost(String content, UserPostType postType, String tags, UserProfile profile) {
         this.content = content;
         this.postType = postType;
         this.tags = tags;
-        this.user = user;
+        this.profile = profile;
         this.createdAt = LocalDateTime.now();
     }
 }
