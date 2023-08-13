@@ -23,10 +23,17 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    @JsonIgnore
     private UserPost post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser user;
+    @JoinColumn(name = "profile_id", nullable = false)
+    private UserProfile profile;
+
+    public Comment(String content, UserPost post, UserProfile profile) {
+        this.content = content;
+        this.post = post;
+        this.profile = profile;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

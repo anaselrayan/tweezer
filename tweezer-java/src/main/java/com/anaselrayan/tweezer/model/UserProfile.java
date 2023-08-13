@@ -37,10 +37,10 @@ public class UserProfile {
 
     @ManyToMany
     @JoinTable(
-            name = "users_friends",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name = "profiles_friends",
+            joinColumns = @JoinColumn(name = "profile_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     @JsonIgnore
-    private Set<UserProfile> followers;
+    private Set<UserProfile> friends;
 }

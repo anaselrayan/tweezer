@@ -2,6 +2,7 @@ package com.anaselrayan.tweezer.services;
 
 import com.anaselrayan.tweezer.model.UserProfile;
 import com.anaselrayan.tweezer.projection.UserProfileDetailed;
+import com.anaselrayan.tweezer.projection.UserProfileSummary;
 import com.anaselrayan.tweezer.repos.UserProfileRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class UserProfileService {
 
     public UserProfileDetailed getUserProfile(String username) {
         return profileRepo.findByUserUsername(username).orElse(null);
+    }
+
+    public List<UserProfileSummary> getProfileFriends(Long profileId) {
+        return profileRepo.findFriendsByProfile(profileId);
     }
 }

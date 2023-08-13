@@ -15,8 +15,8 @@ import java.util.List;
 public class UserPostService {
     private final UserPostRepo postRepo;
 
-    public List<UserPostSummary> getAllPostsForUser(Long profileId) {
-        return postRepo.findPostsByProfileId(profileId);
+    public List<UserPostSummary> getAllPostsForProfile(Long profileId) {
+        return postRepo.findAllByProfileId(profileId);
     }
 
     public UserPost getPostById(Long postId) {

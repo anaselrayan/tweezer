@@ -1,11 +1,11 @@
 package com.anaselrayan.tweezer.projection;
 
-import com.anaselrayan.tweezer.enums.UserPostType;
 import java.time.LocalDateTime;
 
-public interface UserPostSummary {
+public interface CommentSummary {
     Long getId();
     String getContent();
-    UserPostType getPostType();
     LocalDateTime getCreatedAt();
+    LocalDateTime getUpdatedAt();
+    UserProfileSummary getProfile();
 }

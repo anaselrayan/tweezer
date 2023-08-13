@@ -31,7 +31,8 @@ public class AppUser {
     inverseJoinColumns = @JoinColumn(name = "authority_id", nullable = false))
     private Set<Authority> authorities;
 
-    public AppUser(String email, String password, UserProfile profile) {
+    public AppUser(String username, String email, String password, UserProfile profile) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.profile = profile;

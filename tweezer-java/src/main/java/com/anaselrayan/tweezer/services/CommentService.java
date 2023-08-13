@@ -1,6 +1,7 @@
 package com.anaselrayan.tweezer.services;
 
 import com.anaselrayan.tweezer.model.Comment;
+import com.anaselrayan.tweezer.projection.CommentSummary;
 import com.anaselrayan.tweezer.repos.CommentRepo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 public class CommentService {
     private final CommentRepo commentRepo;
 
-    public List<Comment> getPostComments(Long postId) {
+    public List<CommentSummary> getPostComments(Long postId) {
         return commentRepo.findAllByPostId(postId);
     }
 

@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("api/friends")
 @RequiredArgsConstructor
 public class FriendsResource {
-    private UserProfileService profileService;
+    private final UserProfileService profileService;
 
-    @GetMapping("{username}")
-    public List<UserProfileSummary> getUserFriends(@PathVariable String username) {
-        return null;
+    @GetMapping("{profileId}")
+    public List<UserProfileSummary> getProfileFriends(@PathVariable Long profileId) {
+        return profileService.getProfileFriends(profileId);
     }
 }

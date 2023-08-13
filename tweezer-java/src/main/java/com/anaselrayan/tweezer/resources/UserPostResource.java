@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("api/posts")
 public class UserPostResource {
     private final UserPostService postService;
-    @GetMapping("{userId}")
-    public List<UserPostSummary> getAllPostsForUser(@PathVariable Long userId) {
-        return postService.getAllPostsForUser(userId);
+    @GetMapping("{profileId}")
+    public List<UserPostSummary> getAllPostsForUser(@PathVariable Long profileId) {
+        return postService.getAllPostsForProfile(profileId);
     }
 
     @PostMapping
