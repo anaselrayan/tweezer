@@ -1,23 +1,21 @@
 package com.anaselrayan.tweezer.resources;
 
 import com.anaselrayan.tweezer.projection.CommentSummary;
-import com.anaselrayan.tweezer.repos.CommentRepo;
+import com.anaselrayan.tweezer.services.CommentService;
+import com.anaselrayan.tweezer.shared.PaginationRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/comments/")
 @RequiredArgsConstructor
 public class CommentResource {
-    private final CommentRepo commentRepo;
+    private final CommentService commentService;
 
     @GetMapping("{postId}")
-    public List<CommentSummary> getPostComments(@PathVariable Long postId) {
-        return commentRepo.findAllByPostId(postId);
+    public Page<CommentSummary> getPostComments(@PathVariable Long postId,
+                                                @RequestBody PaginationRequest pr) {
+        return commentService.getPostComments(postId, pr);
     }
 }

@@ -1,10 +1,5 @@
 package com.anaselrayan.tweezer.security;
 
-import com.anaselrayan.tweezer.security.authentications.CredentialsAuthentication;
-import com.anaselrayan.tweezer.security.authentications.JwtAuthentication;
-import com.anaselrayan.tweezer.security.providers.CredentialsAuthenticationProvider;
-import com.anaselrayan.tweezer.security.providers.JwtAuthenticationProvider;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderNotFoundException;

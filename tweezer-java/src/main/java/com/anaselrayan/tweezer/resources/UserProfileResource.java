@@ -16,7 +16,6 @@ public class UserProfileResource {
 
     @GetMapping("{username}")
     public UserProfileDetailed getUserProfile(@PathVariable String username) {
-        return profileService.getUserProfile(username);
+        return profileService.getProfileByUsername(username).orElse(null);
     }
-
 }

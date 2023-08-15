@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,8 +30,9 @@ public class WebSecurityConfig {
             c.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
         http.authorizeHttpRequests(c-> {
-           c.anyRequest().authenticated();
+           c.anyRequest().permitAll();
         });
+
         http.addFilterBefore(
                 new CredentialsAuthenticationFilter(authenticationManager()),
                 UsernamePasswordAuthenticationFilter.class

@@ -8,4 +8,5 @@ public interface UserPostSummary {
     String getContent();
     UserPostType getPostType();
     LocalDateTime getCreatedAt();
+    UserProfileSummary getProfile();
 }
