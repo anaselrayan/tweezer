@@ -1,7 +1,9 @@
 package com.anaselrayan.tweezer.enums;
 
 public enum UserPostType {
-    PUBLIC,
-    FRIENDS,
-    PRIVATE
+    PUBLIC("PUBLIC"),
+    FRIENDS("FRIENDS"),
+    PRIVATE("PRIVATE");
+
+    UserPostType(String type) {}
 }

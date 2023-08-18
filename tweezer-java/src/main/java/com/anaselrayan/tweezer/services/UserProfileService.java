@@ -1,10 +1,8 @@
 package com.anaselrayan.tweezer.services;
 
-import com.anaselrayan.tweezer.shared.PaginationRequest;
 import com.anaselrayan.tweezer.projection.UserProfileDetailed;
 import com.anaselrayan.tweezer.projection.UserProfileSummary;
 import com.anaselrayan.tweezer.repos.UserProfileRepo;
-import com.anaselrayan.tweezer.shared.PaginationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +14,7 @@ import java.util.Optional;
 public class UserProfileService {
     private final UserProfileRepo profileRepo;
 
-    public Page<UserProfileSummary> getProfileFriends(Long profileId, PaginationRequest pr) {
-        Pageable pageable = PaginationService.getPageable(pr);
+    public Page<UserProfileSummary> getProfileFriends(Long profileId, Pageable pageable) {
         return profileRepo.findFriendsByProfile(profileId, pageable);
     }
 

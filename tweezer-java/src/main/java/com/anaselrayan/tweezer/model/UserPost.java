@@ -1,12 +1,10 @@
 package com.anaselrayan.tweezer.model;
 
-import com.anaselrayan.tweezer.enums.UserPostType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -19,7 +17,7 @@ public class UserPost {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private UserPostType postType;
+    private String postType;
     private String tags;
     private LocalDateTime createdAt;
 
@@ -30,7 +28,7 @@ public class UserPost {
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
 
-    public UserPost(String content, UserPostType postType, String tags, UserProfile profile) {
+    public UserPost(String content, String postType, String tags, UserProfile profile) {
         this.content = content;
         this.postType = postType;
         this.tags = tags;

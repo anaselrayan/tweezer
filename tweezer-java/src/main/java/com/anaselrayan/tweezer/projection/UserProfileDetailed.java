@@ -1,5 +1,8 @@
 package com.anaselrayan.tweezer.projection;
 
+import com.anaselrayan.tweezer.enums.Gender;
+import com.anaselrayan.tweezer.enums.UserProfileType;
+
 import java.time.LocalDate;
 
 public interface UserProfileDetailed {
@@ -12,4 +15,5 @@ public interface UserProfileDetailed {
     String getCoverImage();
     String getProfileType();
     LocalDate getBirthdate();
+    String getGender();
 }

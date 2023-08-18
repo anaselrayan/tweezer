@@ -29,6 +29,7 @@ public class WebSecurityConfig {
         http.sessionManagement(c-> {
             c.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
+        http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(c-> {
            c.anyRequest().permitAll();
         });

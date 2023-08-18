@@ -2,7 +2,7 @@ package com.anaselrayan.tweezer.resources;
 
 import com.anaselrayan.tweezer.projection.CommentSummary;
 import com.anaselrayan.tweezer.services.CommentService;
-import com.anaselrayan.tweezer.shared.PaginationRequest;
+import com.anaselrayan.tweezer.services.PaginationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,8 @@ public class CommentResource {
 
     @GetMapping("{postId}")
     public Page<CommentSummary> getPostComments(@PathVariable Long postId,
-                                                @RequestBody PaginationRequest pr) {
-        return commentService.getPostComments(postId, pr);
+                                                @RequestParam Integer page,
+                                                @RequestParam(required = false) Integer size) {
+        return commentService.getPostComments(postId, PaginationService.getPageable(page, size));
     }
 }

@@ -16,8 +16,9 @@ public interface UserProfileRepo extends JpaRepository<UserProfile, Long> {
 
     @Query(value = """
         select p.id, p.firstname, p.lastname,
-            p.profile_image, p.phone, p.bio,
-            p.cover_image, p.profile_type, p.birthdate
+            p.profile_image as profileImage, p.phone, p.bio,
+            p.cover_image as coverImage, p.profile_type as ProfileType,
+            p.birthdate, p.gender
         from profiles p
         join users u
         on u.profile_id = p.id
@@ -26,7 +27,7 @@ public interface UserProfileRepo extends JpaRepository<UserProfile, Long> {
     Optional<UserProfileDetailed> findByUsername(String username);
 
     @Query(value = """
-        select p.id, p.firstname, p.lastname, p.profile_image
+        select p.id, p.firstname, p.lastname, p.profile_image as profileImage
         from profiles p
         join profiles_friends pf
         on pf.profile_id = p.id

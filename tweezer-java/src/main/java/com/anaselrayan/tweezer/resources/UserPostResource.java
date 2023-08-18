@@ -2,13 +2,11 @@ package com.anaselrayan.tweezer.resources;
 
 import com.anaselrayan.tweezer.model.UserPost;
 import com.anaselrayan.tweezer.projection.UserPostSummary;
+import com.anaselrayan.tweezer.services.PaginationService;
 import com.anaselrayan.tweezer.services.UserPostService;
-import com.anaselrayan.tweezer.shared.PaginationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,20 +14,17 @@ import java.util.List;
 public class UserPostResource {
     private final UserPostService postService;
 
-//    @GetMapping("{profileId}")
-//    public List<UserPostSummary> getAllPostsForProfile(@PathVariable Long profileId) {
-//        return postService.getAllPostsForProfile(profileId);
-//    }
-
-    @GetMapping("{username}")
-    public Page<UserPostSummary> getAllPostsForUser(@PathVariable String username,
-                                                    @RequestBody PaginationRequest pr) {
-        return postService.getPostsByUsername(username, pr);
+    @GetMapping("{profileId}")
+    public Page<UserPostSummary> getAllPostsForProfile(@PathVariable Long profileId,
+                                                       @RequestParam Integer page,
+                                                       @RequestParam(required = false) Integer size) {
+        return postService.getAllPostsForProfile(profileId, PaginationService.getPageable(page, size));
     }
 
+
     @PostMapping
-    public UserPost addPost(@RequestBody UserPost post) {
-        return postService.addUserPost(post);
+    public void addPost(@RequestBody UserPost post) {
+        postService.createUserPost(post);
     }
 
     @DeleteMapping("{postId}")
