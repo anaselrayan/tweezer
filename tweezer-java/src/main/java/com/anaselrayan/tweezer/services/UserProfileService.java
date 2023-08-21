@@ -1,24 +1,24 @@
 package com.anaselrayan.tweezer.services;
 
-import com.anaselrayan.tweezer.projection.UserProfileDetailed;
-import com.anaselrayan.tweezer.projection.UserProfileSummary;
-import com.anaselrayan.tweezer.repos.UserProfileRepo;
+import com.anaselrayan.tweezer.dao.UserProfileDao;
+import com.anaselrayan.tweezer.dto.UserProfileDto;
+import com.anaselrayan.tweezer.dto.UserProfileSummary;
+import com.anaselrayan.tweezer.pagination.PageRequest;
+import com.anaselrayan.tweezer.pagination.PageableResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserProfileService {
-    private final UserProfileRepo profileRepo;
+    private final UserProfileDao profileDao;
 
-    public Page<UserProfileSummary> getProfileFriends(Long profileId, Pageable pageable) {
-        return profileRepo.findFriendsByProfile(profileId, pageable);
+    public PageableResponse<UserProfileSummary> getProfileFriends(Long profileId, PageRequest pr) {
+        return profileDao.selectProfileFriends(profileId, pr);
     }
 
-    public Optional<UserProfileDetailed> getProfileByUsername(String username) {
-        return profileRepo.findByUsername(username);
+    public Optional<UserProfileDto> getProfileByUsername(String username) {
+        return profileDao.selectByUsername(username);
     }
 }

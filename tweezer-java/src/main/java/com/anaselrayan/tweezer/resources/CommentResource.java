@@ -1,22 +1,29 @@
 package com.anaselrayan.tweezer.resources;
 
-import com.anaselrayan.tweezer.projection.CommentSummary;
+import com.anaselrayan.tweezer.dto.CommentDto;
+import com.anaselrayan.tweezer.pagination.PageRequest;
+import com.anaselrayan.tweezer.pagination.PageableResponse;
 import com.anaselrayan.tweezer.services.CommentService;
-import com.anaselrayan.tweezer.services.PaginationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/comments/")
+@RequestMapping("api/comments")
 @RequiredArgsConstructor
 public class CommentResource {
     private final CommentService commentService;
 
     @GetMapping("{postId}")
-    public Page<CommentSummary> getPostComments(@PathVariable Long postId,
-                                                @RequestParam Integer page,
-                                                @RequestParam(required = false) Integer size) {
-        return commentService.getPostComments(postId, PaginationService.getPageable(page, size));
+    public PageableResponse<CommentDto> getPostComments(@PathVariable Long postId,
+                                                        @RequestParam Integer page,
+                                                        @RequestParam(required = false) Integer size) {
+        var pr = new PageRequest(page, size);
+        return commentService.getPostComments(postId, pr);
+    }
+
+
+    @PostMapping
+    public void addComment(@RequestBody CommentDto comment) {
+        commentService.addComment(comment);
     }
 }

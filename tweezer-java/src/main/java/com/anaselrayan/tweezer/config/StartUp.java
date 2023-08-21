@@ -1,5 +1,6 @@
 package com.anaselrayan.tweezer.config;
 
+import com.anaselrayan.tweezer.dao.UserProfileDao;
 import com.anaselrayan.tweezer.enums.Gender;
 import com.anaselrayan.tweezer.enums.UserPostType;
 import com.anaselrayan.tweezer.enums.UserProfileType;
@@ -24,6 +25,7 @@ public class StartUp implements CommandLineRunner {
     private final UserPostRepo postRepo;
     private final AppUserRepo userRepo;
     private final UserProfileRepo profileRepo;
+    private final UserProfileDao profileDao;
     private final PasswordEncoder passwordEncoder;
     private final CommentRepo commentRepo;
 
@@ -45,7 +47,7 @@ public class StartUp implements CommandLineRunner {
         AppUser user2 =
                 new AppUser("ahmed", "ahmed@gmail.com", passwordEncoder.encode("123"), profile2);
         AppUser user3 =
-                new AppUser("belal","belal@gmail.com", passwordEncoder.encode("123"), profile3);
+                new AppUser("belal", "belal@gmail.com", passwordEncoder.encode("123"), profile3);
 
         UserPost post1 = new UserPost("Anas First Post",
                 UserPostType.PUBLIC.name(), "", profile1);
@@ -76,7 +78,7 @@ public class StartUp implements CommandLineRunner {
         commentRepo.save(comment2);
         commentRepo.save(comment3);
 
-        profileRepo.addFriendToProfile(profile1.getId(), profile3.getId());
-        profileRepo.addFriendToProfile(profile1.getId(), profile2.getId());
+        profileDao.insertFriend(profile1.getId(), profile3.getId());
+        profileDao.insertFriend(profile1.getId(), profile2.getId());
     }
 }

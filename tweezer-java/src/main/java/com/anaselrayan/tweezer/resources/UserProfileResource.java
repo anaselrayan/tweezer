@@ -1,6 +1,6 @@
 package com.anaselrayan.tweezer.resources;
 
-import com.anaselrayan.tweezer.projection.UserProfileDetailed;
+import com.anaselrayan.tweezer.dto.UserProfileDto;
 import com.anaselrayan.tweezer.services.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/profile")
+@RequestMapping("api/profiles")
 public class UserProfileResource {
     private final UserProfileService profileService;
 
     @GetMapping("{username}")
-    public UserProfileDetailed getUserProfile(@PathVariable String username) {
+    public UserProfileDto getUserProfile(@PathVariable String username) {
         return profileService.getProfileByUsername(username).orElse(null);
     }
 }
