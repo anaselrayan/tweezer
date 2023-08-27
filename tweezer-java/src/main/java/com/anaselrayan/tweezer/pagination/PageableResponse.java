@@ -2,7 +2,6 @@ package com.anaselrayan.tweezer.pagination;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Setter @Getter
@@ -18,6 +17,6 @@ public class PageableResponse<T> {
         this.totalElements = totalElements;
         this.page = pageRequest.getPage();
         this.size = pageRequest.getSize();
-        this.totalPages = totalElements / size;
+        this.totalPages = (int) Math.ceil(totalElements / (size*1.0));
     }
 }

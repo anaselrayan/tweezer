@@ -1,12 +1,13 @@
 package com.anaselrayan.tweezer.config;
 
+import com.anaselrayan.tweezer.dao.ReactDao;
 import com.anaselrayan.tweezer.dao.UserProfileDao;
 import com.anaselrayan.tweezer.enums.Gender;
 import com.anaselrayan.tweezer.enums.UserPostType;
 import com.anaselrayan.tweezer.enums.UserProfileType;
 import com.anaselrayan.tweezer.model.AppUser;
 import com.anaselrayan.tweezer.model.Comment;
-import com.anaselrayan.tweezer.model.UserPost;
+import com.anaselrayan.tweezer.model.Post;
 import com.anaselrayan.tweezer.model.UserProfile;
 import com.anaselrayan.tweezer.repos.AppUserRepo;
 import com.anaselrayan.tweezer.repos.CommentRepo;
@@ -28,6 +29,7 @@ public class StartUp implements CommandLineRunner {
     private final UserProfileDao profileDao;
     private final PasswordEncoder passwordEncoder;
     private final CommentRepo commentRepo;
+    private final ReactDao reactDao;
 
     @Override
     public void run(String... args) throws Exception {
@@ -43,19 +45,19 @@ public class StartUp implements CommandLineRunner {
         profile3.setFirstname("Belal");
 
         AppUser user1 =
-                new AppUser("anas_elrayan", "anas@gmail.com", passwordEncoder.encode("123"), profile1);
+                new AppUser("anas_elrayan", "an", passwordEncoder.encode(""), profile1);
         AppUser user2 =
-                new AppUser("ahmed", "ahmed@gmail.com", passwordEncoder.encode("123"), profile2);
+                new AppUser("ahmed", "ah", passwordEncoder.encode(""), profile2);
         AppUser user3 =
-                new AppUser("belal", "belal@gmail.com", passwordEncoder.encode("123"), profile3);
+                new AppUser("belal", "bl", passwordEncoder.encode(""), profile3);
 
-        UserPost post1 = new UserPost("Anas First Post",
+        Post post1 = new Post("Anas First Post",
                 UserPostType.PUBLIC.name(), "", profile1);
 
-        UserPost post2 = new UserPost("Anas second post!",
+        Post post2 = new Post("Anas second post!",
                 UserPostType.FRIENDS.name(), "", profile1);
 
-        UserPost post3 = new UserPost("Belal First Post",
+        Post post3 = new Post("Belal First Post",
                 UserPostType.FRIENDS.name(), "", profile3);
 
         Comment comment1 = new Comment("Belal On Anas's 1st post", post1, profile3);

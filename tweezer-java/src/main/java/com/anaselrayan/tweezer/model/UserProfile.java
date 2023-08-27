@@ -1,7 +1,5 @@
 package com.anaselrayan.tweezer.model;
 
-import com.anaselrayan.tweezer.enums.Gender;
-import com.anaselrayan.tweezer.enums.UserProfileType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +28,7 @@ public class UserProfile {
     private String gender;
 
     @OneToMany(mappedBy = "profile")
-    private Set<UserPost> posts;
+    private Set<Post> posts;
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +37,14 @@ public class UserProfile {
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     private Set<UserProfile> friends;
+
+    @ManyToMany
+    @JoinTable(
+            name = "friends_requests",
+            joinColumns = @JoinColumn(name = "profile_id"),
+            inverseJoinColumns = @JoinColumn(name = "sender_id")
+    )
+    private Set<UserProfile> friendRequests;
 
     public UserProfile(String firstname, String lastname, String phone, String bio, LocalDate birthdate, String profileImage, String coverImage, String profileType, String gender) {
         this.firstname = firstname;

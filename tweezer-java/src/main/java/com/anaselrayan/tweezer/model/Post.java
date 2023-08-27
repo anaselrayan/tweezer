@@ -5,34 +5,39 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "posts")
 @Setter @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
+    private String postType;
+    private String tags;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    private Long reacts;
 
     @ManyToOne
     @JoinColumn(name = "profile_id", nullable = false)
     private UserProfile profile;
 
-    public Comment(String content, Post post, UserProfile profile) {
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> commentSet;
+
+    @OneToMany(mappedBy = "post")
+    private Set<React> reactSet;
+
+    public Post(String content, String postType, String tags, UserProfile profile) {
         this.content = content;
-        this.post = post;
+        this.postType = postType;
+        this.tags = tags;
         this.profile = profile;
         this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.reacts = 0L;
     }
 }

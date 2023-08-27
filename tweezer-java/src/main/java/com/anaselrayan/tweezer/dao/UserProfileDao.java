@@ -4,6 +4,7 @@ import com.anaselrayan.tweezer.dto.UserProfileDto;
 import com.anaselrayan.tweezer.dto.UserProfileSummary;
 import com.anaselrayan.tweezer.pagination.PageRequest;
 import com.anaselrayan.tweezer.pagination.PageableResponse;
+import com.anaselrayan.tweezer.pagination.PaginationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,15 +41,10 @@ public class UserProfileDao {
                     ON pf.profile_id = p.id
                     WHERE pf.friend_id = ?
                 """;
+        int tot = featuresDao.getRowsCount(sql, profileId);
+        sql = PaginationService.addSortAndPaginationQuery(sql, pr);
         var content = jdbcTemplate.query(sql, new UserProfileSummary(), profileId);
-        int count = featuresDao.getRowsCount(sql, profileId);
-        return new PageableResponse<>(content, count, pr);
-    }
-
-    public void insertFriend(Long profileId, Long friendId) {
-        jdbcTemplate.update("INSERT INTO profiles_friends VALUES (?, ?), (?,?)",
-                profileId, friendId, friendId, profileId);
-
+        return new PageableResponse<>(content, tot, pr);
     }
 }
 

@@ -1,6 +1,6 @@
 package com.anaselrayan.tweezer.repos;
 
-import com.anaselrayan.tweezer.model.UserPost;
+import com.anaselrayan.tweezer.model.Post;
 import com.anaselrayan.tweezer.projection.UserPostSummary;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 
-public interface UserPostRepo extends JpaRepository<UserPost, Long> {
+public interface UserPostRepo extends JpaRepository<Post, Long> {
 
     Page<UserPostSummary> findAllByProfileId(Long profileId, Pageable pageable);
 

@@ -21,7 +21,7 @@ public class CredentialsAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String username = request.getHeader("username");
+        String username = request.getHeader("email");
         String password = request.getHeader("password");
         if (null != username && null != password) {
             System.out.println(username + ":" + password);

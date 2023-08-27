@@ -2,7 +2,7 @@ package com.anaselrayan.tweezer.security.config;
 
 import com.anaselrayan.tweezer.repos.AppUserRepo;
 import com.anaselrayan.tweezer.security.AppAuthenticationManager;
-import com.anaselrayan.tweezer.security.AppUserService;
+import com.anaselrayan.tweezer.services.AppUserService;
 import com.anaselrayan.tweezer.security.filters.CredentialsAuthenticationFilter;
 import com.anaselrayan.tweezer.security.providers.CredentialsAuthenticationProvider;
 import com.anaselrayan.tweezer.security.providers.JwtAuthenticationProvider;

@@ -23,4 +23,8 @@ public class UserPostService {
         postDao.insertPost(post.getContent(), post.getPostType(),
                 post.getCreatedAt(), post.getProfile().getProfileId());
     }
+
+    public PageableResponse<UserPostDto> getFriendsPosts(Long profileId, PageRequest pr) {
+        return postDao.selectFriendsPosts(profileId, pr);
+    }
 }

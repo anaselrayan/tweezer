@@ -1,4 +1,4 @@
-package com.anaselrayan.tweezer.security;
+package com.anaselrayan.tweezer.services;
 
 import com.anaselrayan.tweezer.model.AppUser;
 import com.anaselrayan.tweezer.repos.AppUserRepo;

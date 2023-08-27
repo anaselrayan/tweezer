@@ -17,6 +17,7 @@ public class UserPostDto implements RowMapper<UserPostDto> {
     public String content;
     public String tags;
     public String postType;
+    public Long reacts;
     public LocalDateTime createdAt;
     public UserProfileSummary profile;
 
@@ -27,6 +28,7 @@ public class UserPostDto implements RowMapper<UserPostDto> {
                 rs.getString("content"),
                 rs.getString("tags"),
                 rs.getString("post_type"),
+                rs.getLong("reacts"),
                 rs.getTimestamp("created_at").toLocalDateTime(),
                 new UserProfileSummary().mapRow(rs, rowNum)
         );
